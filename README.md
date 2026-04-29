@@ -1,13 +1,24 @@
 # FutBlog ⚽
 
 Mini blog de fútbol con artículos, filtros, favoritos y artículo aleatorio.
+## Nivel objetivo: Senior
+
+Este proyecto apunta al nivel **Senior** (100 pts), cumpliendo todos los requisitos base, Mid y Senior:
+- Página 404 personalizada
+- Búsqueda y filtro por categoría en el listado
+- Botón "artículo aleatorio" con `useNavigate`
+- Componentes reutilizables con PropTypes documentados
+- Estado global con Context API (favoritos)
+- Al menos 3 componentes con PropTypes definidos
+- Base de datos real (PostgreSQL) consumida vía API REST
+
+---
 
 ## Tecnologías
 
 - **Frontend:** React 18 + Vite + React Router v6 + Context API
 - **Backend:** Python + FastAPI + SQLAlchemy
 - **Base de datos:** PostgreSQL 15
-- **DevOps:** Docker + Docker Compose
 
 ---
 
@@ -110,3 +121,40 @@ npm run dev
 |---|---|---|
 | GET | `/items` | Lista todos los artículos |
 | GET | `/items/:id` | Detalle de un artículo |
+
+---
+
+## Componentes reutilizables
+
+### `<ItemCard item />`
+
+Tarjeta de artículo que muestra imagen, categoría, título, resumen y botón de favorito.
+
+| Prop | Tipo | Requerida | Descripción |
+|---|---|---|---|
+| `item.id` | `number` | ✅ | ID del artículo |
+| `item.title` | `string` | ✅ | Título del artículo |
+| `item.summary` | `string` | — | Resumen breve |
+| `item.content` | `string` | — | Contenido completo |
+| `item.author` | `string` | — | Autor |
+| `item.category` | `string` | — | Categoría (ej. "Champions") |
+| `item.image_url` | `string` | — | URL de la imagen de portada |
+| `item.tags` | `string` | — | Etiquetas separadas por coma |
+
+---
+
+### `<SearchBar value onChange placeholder />`
+
+Input de búsqueda controlado.
+
+| Prop | Tipo | Requerida | Descripción |
+|---|---|---|---|
+| `value` | `string` | ✅ | Valor actual del input |
+| `onChange` | `func` | ✅ | Callback que recibe el nuevo string |
+| `placeholder` | `string` | — | Texto placeholder (default: "Buscar artículos...") |
+
+---
+
+### `<PageTransition>`
+
+Envuelve una página y aplica animación de entrada/salida con Framer Motion. No recibe props propias; acepta cualquier elemento hijo (`children`).
